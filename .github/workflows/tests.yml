@@ -25,6 +25,12 @@ jobs:
         run: python -m pytest -q
       - name: Run sample pipeline
         run: python src/main.py --config config.yaml
+      - name: Build Docker image
+        run: docker build -t hypergamy-engagement .
+      - name: Run Docker sample
+        run: |
+          mkdir -p results
+          docker run --rm -v "$PWD/results:/app/results" hypergamy-engagement
       - name: Verify generated outputs
         run: |
           test -s results/results.json
