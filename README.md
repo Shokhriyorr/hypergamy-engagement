@@ -14,10 +14,11 @@ The current code implements quantitative analysis. Qualitative content coding, i
 
 Let `Δ = median(log-ER_short) − median(log-ER_long)`.
 
-- **Directional research hypothesis:** `Δ > 0`.
+- **Null hypothesis (H0):** `Δ ≤ 0`.
+- **Directional alternative hypothesis (H1):** `Δ > 0`.
 - **Observed statistic:** the difference between the two sample medians.
 - **Primary test:** a one-sided pooled permutation test, α = 0.05, 5,000 permutations, seed = 42.
-- **Important inference assumption:** the pooled permutation procedure relies on exchangeability under the null (approximately, equal distributions across groups). It is not an exact test of the composite null `Δ ≤ 0` under arbitrary differences in distribution shape or spread. Interpret the p-value with this assumption in mind.
+- **Important inference assumption:** the pooled permutation procedure relies on exchangeability under its permutation null (approximately, equal distributions across groups). It is not an exact test of the composite null `Δ ≤ 0` under arbitrary differences in distribution shape or spread. Interpret the p-value with this assumption in mind.
 - **Engagement rate:** `ER = (likes + comments) / views`. Shares are excluded to keep the numerator comparable across platforms.
 
 The design is observational and supports conclusions about association, not causation. The bundled nine-row dataset is synthetic and validates the pipeline only; its p-values are not evidence about real-world content.
@@ -61,7 +62,7 @@ hypergamy-engagement/
 
 ## Quickstart (Docker)
 
-Run these commands from the repository root:
+Run these three commands from a terminal:
 
 ```bash
 git clone https://github.com/Shokhriyorr/hypergamy-engagement.git
@@ -69,7 +70,7 @@ cd hypergamy-engagement
 docker build -t hypergamy-engagement . && docker run --rm -v "$(pwd)/results:/app/results" hypergamy-engagement
 ```
 
-The container runs the bundled sample and writes `results/run_log.txt` and `results/results.json`. The build and run are joined in the third command; if you prefer to diagnose them separately, run `docker build -t hypergamy-engagement .` and then `docker run --rm -v "$(pwd)/results:/app/results" hypergamy-engagement`.
+The container runs the bundled sample and writes `results/run_log.txt` and `results/results.json`. The build and run are joined in the third command. If that command fails, check that Docker is installed and running.
 
 ### Run without Docker
 
@@ -98,7 +99,7 @@ Any future real-data collection must use platform APIs or other sources permitte
 
 ## Reproducibility and automated checks
 
-GitHub Actions runs the test suite and executes the pipeline on pushes and pull requests. The workflow uses Python 3.11 and the exact package versions listed in `requirements.txt`. A successful CI run verifies the automated tests and sample pipeline; it does not validate hypotheses on real-world data.
+GitHub Actions runs the test suite, executes the pipeline on the synthetic sample, and builds/runs the Docker image on pushes and pull requests. The workflow uses Python 3.11 and the exact package versions listed in `requirements.txt`. A successful CI run verifies the automated tests, sample pipeline, and Docker build/run; it does not validate hypotheses on real-world data.
 
 ## Citation
 
