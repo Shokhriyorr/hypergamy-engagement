@@ -1,0 +1,30 @@
+# All experiment parameters are centralized here.
+experiment:
+  name: hypergamy-engagement-pilot
+  seed: 42
+  alpha: 0.05
+  n_permutations: 5000
+
+data:
+  input_path: data/sample/sample.csv
+  output_dir: results
+  min_views: 1000
+  language: en
+  period_start: "2026-01-01"
+  period_end: "2026-09-30"
+
+# Operational definition of format groups for the primary hypothesis.
+platforms:
+  short_form: [TikTok, Reels]
+  long_form: [YouTube]
+  baseline: YouTube
+
+# Collection-stage parameters; API error rate is not measured by the offline pipeline.
+collection:
+  hashtags: ["#hypergamy", "#levelup"]
+  target_videos: 500
+  request_timeout_sec: 30
+  max_error_rate: 0.05
+
+guardrails:
+  min_complete_rate: 0.95
