@@ -4,7 +4,7 @@
 
 - **Название работы:** Почему гипергамия стала популярным дискурсом в социальных сетях в 2026 году: кросс-платформенный анализ вовлеченности (TikTok, Instagram Reels, YouTube)
 - **Состав пары:** Шах , Ертис 
-- **GitHub-репозиторий:** [https://github.com/USERNAME/hypergamy-engagement](https://github.com/Shokhriyorr/hypergamy-engagement)
+- **GitHub-репозиторий:** https://github.com/Shokhriyorr/hypergamy-engagement
 
 ## 2. Тип исследования
 
