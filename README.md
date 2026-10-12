@@ -12,12 +12,13 @@ The current code implements quantitative analysis. Qualitative content coding, i
 
 **Research Question (RQ2):** Is median log engagement rate higher for short-form videos (TikTok and Instagram Reels) than for YouTube long-form videos?
 
-Let \(\Delta = \operatorname{Med}(\log ER_{short}) - \operatorname{Med}(\log ER_{long})\).
+Let `Δ = median(log-ER_short) − median(log-ER_long)`.
 
-- **H0:** \(\Delta \leq 0\).
-- **H1:** \(\Delta > 0\).
-- **Primary test:** one-sided permutation test of the difference in medians, α = 0.05, 5,000 permutations, seed = 42.
-- **Engagement rate:** \(ER = (likes + comments) / views\). Shares are excluded to keep the numerator comparable across platforms.
+- **Directional research hypothesis:** `Δ > 0`.
+- **Observed statistic:** the difference between the two sample medians.
+- **Primary test:** a one-sided pooled permutation test, α = 0.05, 5,000 permutations, seed = 42.
+- **Important inference assumption:** the pooled permutation procedure relies on exchangeability under the null (approximately, equal distributions across groups). It is not an exact test of the composite null `Δ ≤ 0` under arbitrary differences in distribution shape or spread. Interpret the p-value with this assumption in mind.
+- **Engagement rate:** `ER = (likes + comments) / views`. Shares are excluded to keep the numerator comparable across platforms.
 
 The design is observational and supports conclusions about association, not causation. The bundled nine-row dataset is synthetic and validates the pipeline only; its p-values are not evidence about real-world content.
 
@@ -27,7 +28,7 @@ The design is observational and supports conclusions about association, not caus
 |---|---|---|
 | B1 | Pipeline smoke test on synthetic sample | Implemented; writes `results/run_log.txt` and `results/results.json` |
 | B2 | Compare engagement across TikTok, Reels, and YouTube | Implemented; Kruskal–Wallis and Holm-adjusted pairwise Mann–Whitney tests |
-| B3 | Compare short-form with YouTube long-form | Implemented; one-sided permutation test, median difference, and Cliff's δ |
+| B3 | Compare short-form with YouTube long-form | Implemented; one-sided pooled permutation test, median difference, and Cliff's δ |
 | B4 | Compare with a neutral-topic sample | Planned; dataset and analysis are not included |
 | B5 | Covariate-adjusted model (followers, duration, video age) | Planned; regression is not implemented |
 | B6 | Qualitative content coding and Cohen's κ | Planned; coding protocol and reliability analysis are not included |
@@ -49,7 +50,7 @@ hypergamy-engagement/
 │   └── analyze.py
 ├── tests/test_metrics.py
 ├── docs/methodology_card.md
-└── results/                 # generated outputs; not committed
+└── .github/workflows/tests.yml
 ```
 
 ## System requirements
@@ -60,7 +61,7 @@ hypergamy-engagement/
 
 ## Quickstart (Docker)
 
-Run these commands from the terminal:
+Run these commands from the repository root:
 
 ```bash
 git clone https://github.com/Shokhriyorr/hypergamy-engagement.git
@@ -94,6 +95,10 @@ Edit `config.yaml` to change the input file, output directory, minimum views, pl
 The included data are synthetic. The offline pipeline checks completeness of required fields, removes duplicate `video_id` values, and excludes invalid engagement-count rows. API error rate cannot be measured from the bundled offline dataset and must be recorded during data collection. Cohen's κ requires independently coded annotations and is not calculated by the current quantitative pipeline.
 
 Any future real-data collection must use platform APIs or other sources permitted by their terms and applicable research ethics requirements. Document collection dates, API error rates, sampling rules, exclusions, anonymization, and rate-limit compliance. Do not collect or publish private personal information.
+
+## Reproducibility and automated checks
+
+GitHub Actions runs the test suite and executes the pipeline on pushes and pull requests. The workflow uses Python 3.11 and the exact package versions listed in `requirements.txt`. A successful CI run verifies the automated tests and sample pipeline; it does not validate hypotheses on real-world data.
 
 ## Citation
 
