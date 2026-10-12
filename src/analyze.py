@@ -61,7 +61,12 @@ def pairwise_tests(df, value_col="log_er"):
 
 
 def permutation_test_short_vs_long(df, short, long_, n_perm, seed, value_col="log_er"):
-    """One-sided permutation test for median(short) - median(long) > 0."""
+    """One-sided pooled permutation test using median(short) - median(long).
+
+    The pooled permutation null assumes exchangeability/equal distributions;
+    it is not an exact test of the composite null that the median difference
+    is non-positive under arbitrary differences in distribution shape/spread.
+    """
     if n_perm < 1:
         raise ValueError("n_perm must be at least 1")
     s = df[df["platform"].isin(short)][value_col].dropna().to_numpy(dtype=float)
