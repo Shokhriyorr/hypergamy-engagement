@@ -1,6 +1,6 @@
 # Cross-Platform Engagement Analysis of Hypergamy Discourse (2026)
 
-**Authors:** Shah , Yertis   
+**Authors:** Tazhimuratov Shokhriyor , Yertis   
 **Repository:** 
 **License:** MIT
 ## Overview
@@ -92,7 +92,7 @@ The included data are synthetic. Any future real-data collection must use platfo
 
 If you use or adapt this repository, cite it as:
 
-> Shah & Yertis. (2026). *Cross-Platform Engagement Analysis of Hypergamy Discourse (2026)* . GitHub..
+> Shah & Yertis. (2026). *Cross-Platform Engagement Analysis of Hypergamy Discourse (2026)* . GitHub  https://github.com/Shokhriyorr/hypergamy-engagement.
 
 ## License
 
